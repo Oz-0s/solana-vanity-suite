@@ -11,7 +11,7 @@ const rpcUrl = arg("rpc") ?? "https://api.devnet.solana.com";
 const network = arg("network") ?? "devnet";
 const genesisHashes = {
   devnet: "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
-  mainnet: "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp",
+  mainnet: "5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d",
 } as const;
 
 if (!creatorPath || !membersValue) {
@@ -35,9 +35,6 @@ if (new Set(members.map(String)).size !== members.length) throw new Error("Membe
 if (!Number.isInteger(threshold) || threshold < 1 || threshold > members.length) throw new Error("Invalid threshold");
 
 const creator = readKeypair(creatorPath);
-if (!members.some((member) => member.equals(creator.publicKey))) {
-  throw new Error("The creator must be included in --members");
-}
 
 console.log(`Network: ${network}`);
 console.log(`Vault (send funds here): ${saved.vaultPda}`);

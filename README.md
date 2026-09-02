@@ -77,7 +77,7 @@ At least one of `--prefix` or `--suffix` is required. Exact matching is probabil
 
 ## 2. Create and verify on Devnet
 
-The creator must be one of the members and needs a small amount of Devnet SOL. Supply a standard 64-byte Solana CLI JSON keypair file. Never commit that file.
+The creator is the one-time transaction signer and payer; it does not need to be a multisig member. It needs a small amount of Devnet SOL. Supply a standard 64-byte Solana CLI JSON keypair file. Never commit that file.
 
 ```sh
 npm run create -- \
