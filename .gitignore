@@ -1,0 +1,8 @@
+node_modules/
+dist/
+rust-grinder/target/
+results/*
+!results/.gitkeep
+*.keypair.json
+.env
+*.log

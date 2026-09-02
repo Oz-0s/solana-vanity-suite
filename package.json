@@ -1,0 +1,27 @@
+{
+  "name": "multisig-vanity",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline Squads v4 vanity vault grinder and safe multisig creator",
+  "scripts": {
+    "build": "tsc",
+    "grind": "npm run build --silent && node dist/grind.js",
+    "rust:build": "cargo build --release --manifest-path rust-grinder/Cargo.toml",
+    "rust:test": "cargo test --release --manifest-path rust-grinder/Cargo.toml",
+    "rust:grind": "npm run rust:build --silent && ./rust-grinder/target/release/solana-vanity-grinder",
+    "create": "npm run build --silent && node dist/create.js",
+    "test": "npm run build --silent && node --test dist/*.test.js"
+  },
+  "dependencies": {
+    "@solana/web3.js": "^1.98.4",
+    "@sqds/multisig": "2.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
