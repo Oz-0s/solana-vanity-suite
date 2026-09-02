@@ -52,8 +52,11 @@ if (genesisHash !== genesisHashes[network as keyof typeof genesisHashes]) {
 if (await connection.getAccountInfo(expected.multisigPda, "confirmed")) {
   throw new Error("The derived multisig account already exists; refusing to submit a duplicate creation");
 }
-const signature = await multisig.rpc.multisigCreate({
+const [programConfigPda] = multisig.getProgramConfigPda({});
+const programConfig = await multisig.accounts.ProgramConfig.fromAccountAddress(connection, programConfigPda, "confirmed");
+const signature = await multisig.rpc.multisigCreateV2({
   connection,
+  treasury: programConfig.treasury,
   creator,
   createKey,
   multisigPda: expected.multisigPda,
@@ -61,6 +64,7 @@ const signature = await multisig.rpc.multisigCreate({
   timeLock: 0,
   members: members.map((key) => ({ key, permissions: multisig.types.Permissions.all() })),
   threshold,
+  rentCollector: null,
   sendOptions: { skipPreflight: false, preflightCommitment: "confirmed" },
 });
 
